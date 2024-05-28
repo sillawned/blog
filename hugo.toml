@@ -1,4 +1,24 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
+baseURL = 'https://sillawned.github.io/'
+languageCode = 'fr-fr'
+title = 'sillawned'
 theme = 'hugo-coder'
+defaultContentLanguage = "fr"
+
+[params]
+    author = "sillawned"
+    description = "sillawned's personal blog"
+    info = ["Hack"]
+    dateFormat = "02-03-2006"
+    since = 2024
+    colorScheme = "auto"
+    maxSeeAlsoItems = 5
+
+[[languages.fr.menu.main]]
+    name = "A propos"
+    weight = 1
+    url = "about/"
+
+[[languages.fr.menu.main]]
+    name = "Blog"
+    weight = 2
+    url = "posts/"

@@ -37,7 +37,7 @@ L'objectif de ce challenge est "simple"[^1] : placer notre personnage en haut de
 
 La première chose que l'on observe en lançant le jeu est la vie du personnage en haut à gauche de l'écran : **Health: 255**.
 
-![Vie du personnage](../../assets/images/2024-05-27_22-22-health.png)
+![Vie du personnage](./2024-05-27_22-22-health.png)
 
 Au niveau des contrôles on note :
 - avancer/reculer (touches Z/S),
@@ -53,11 +53,11 @@ Pour cette étape nous allons utiliser [Cheat Engine](https://github.com/cheat-e
 
 En ouvrant le fichier `Galahad_Quest\Galahad Quest_Data\Managed\Assembly-CSharp.dll` dans dnSpy, nous identifions le type `byte` pour la variable `health` et elle est initialisée à `byte.MaxValue`, i.e 255.
 
-![Structure du personnage](../../assets/images/2024-05-27_23-11-player-structure.png)
+![Structure du personnage](./2024-05-27_23-11-player-structure.png)
 
 Dans Cheat Engine nous allons donc rechercher la valeur `255` (ou `FF` en hexadécimal) de type `Byte` dans le processus `Galahad Quest`.
 
-![Recherche de l'adresse de health](../../assets/images/2024-05-27_23-17-recherche-health.png)
+![Recherche de l'adresse de health](./2024-05-27_23-17-recherche-health.png)
 
 La première itération remonte un grand nombre de valeurs (~127 millions) et évidemment nous n'allons pas passer sur chaque valeur à la main pour trouver la bonne adresse.
 Cheat Engine dispose d'un panel de type de scans pour affiner notre résultat. Dans notre cas nous allons utilisé de façon aléatoire mais logique les scans suivants :
@@ -69,15 +69,15 @@ _Notabene: le scan 'unchanged' est utilisé lorsque la valeur de la vie n'a pas 
 <p>
 <details><summary>Hints pour modifier la vie</summary>
 
-La vie change sur l'épée (ne pas aller trop loin pour les premiers scans). ![Recherche d'une valeur inférieure à la recherche précédente](../../assets/images/2024-05-27_23-38-decreased-value.png)
+La vie change sur l'épée (ne pas aller trop loin pour les premiers scans). ![Recherche d'une valeur inférieure à la recherche précédente](./2024-05-27_23-38-decreased-value.png)
 </details>
 </p>
 
-![Adresse de la variable health](../../assets/images/2024-05-27_23-31-scan-type.png)
+![Adresse de la variable health](./2024-05-27_23-31-scan-type.png)
 
 Après plusieurs itérations nous obtenons l'adresse de la variable `health`, qui appartient à la structure `PlayerController` (cf. dnSpy).
 
-![Adresse de la variable health trouvée](../../assets/images/2024-05-27_23-41-health-found.png)
+![Adresse de la variable health trouvée](./2024-05-27_23-41-health-found.png)
 
 _Notabene: Nous obtenons une adresse dynamique, c'est-à-dire qui sera différente à chaque lancement du jeu (et donc cela implique de refaire le processus de recherche à chaque relancement). Pour les plus curieux, Cheat Engine représente les adresses statiques avec une couleur verte. Libre à vous de remonter la chaîne des pointeurs pour trouver une adresse statique (spoiler: je ne l'ai pas fait)._
 
